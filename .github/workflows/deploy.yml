@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: upload files to OSS
-      uses: ShirasawaSama/aliyun-oss-website-action@v2.0.0
+      uses: ShirasawaSama/aliyun-oss-website-action@v2
       with:
         accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
         accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
@@ -21,11 +21,11 @@ jobs:
               "headers": { "Cache-Control": "public, max-age=0, must-revalidate" }
             },
             {
-              "path": "^public/",
+              "path": "^/public/",
               "headers": { "Cache-Control": "max-age=31536000, immutable" }
             },
             {
-              "path": "^manifest.webmanifest$",
+              "path": "^/manifest.webmanifest$",
               "headers": { "Content-Type": "application/manifest+json" }
             },
             {
