@@ -1,24 +1,9 @@
 on:
   push:
 
-headers:
-  - path: '\\.html$'
-    headers:
-      Cache-Control: 'public, max-age=0, must-revalidate'
-  - path: '^public/'
-    headers:
-      Cache-Control: 'max-age=31536000, immutable'
-  - path: '^manifest.webmanifest$'
-    headers:
-      Content-Type: 'application/manifest+json'
-  - path: ''
-    headers:
-      Cache-Control: 'no-cache'
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: upload files to OSS
@@ -29,4 +14,22 @@ jobs:
         bucket: ${{ secrets.BUCKET }}
         endpoint: ${{ secrets.ENDPOINT }}
         folder: dist
-        headers: ${{ toJson(headers) }}
+        headers: |
+          [
+            {
+              "path": "\\.html$",
+              "headers": { "Cache-Control": "public, max-age=0, must-revalidate" }
+            },
+            {
+              "path": "^public/",
+              "headers": { "Cache-Control": "max-age=31536000, immutable" }
+            },
+            {
+              "path": "^manifest.webmanifest$",
+              "headers": { "Content-Type": "application/manifest+json" }
+            },
+            {
+              "path": "",
+              "headers": { "Cache-Control": "no-cache" }
+            }
+          ]
