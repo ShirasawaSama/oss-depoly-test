@@ -1,0 +1,27 @@
+headers:
+  - path: '\\.html$'
+    headers:
+      Cache-Control: 'public, max-age=0, must-revalidate'
+  - path: '^public/'
+    headers:
+      Cache-Control: 'max-age=31536000, immutable'
+  - path: '^manifest.webmanifest$'
+    headers:
+      Content-Type: 'application/manifest+json'
+  - path: ''
+    headers:
+      Cache-Control: 'no-cache'
+
+jobs:
+  build:
+    steps:
+    - uses: actions/checkout@v3
+    - name: upload files to OSS
+      uses: ShirasawaSama/aliyun-oss-website-action
+      with:
+        accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
+        accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
+        bucket: ${{ secrets.BUCKET }}
+        endpoint: ${{ secrets.ENDPOINT }}
+        folder: dist
+        headers: ${{ toJson(headers) }}
