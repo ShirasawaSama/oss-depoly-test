@@ -18,11 +18,11 @@ headers:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
     - name: upload files to OSS
-      uses: ShirasawaSama/aliyun-oss-website-action
+      uses: ShirasawaSama/aliyun-oss-website-action@v2
       with:
         accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
         accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
