@@ -21,7 +21,7 @@ jobs:
               "headers": { "Cache-Control": "public, max-age=0, must-revalidate" }
             },
             {
-              "path": "^/public/",
+              "path": "^/static/",
               "headers": { "Cache-Control": "max-age=31536000, immutable" }
             },
             {
