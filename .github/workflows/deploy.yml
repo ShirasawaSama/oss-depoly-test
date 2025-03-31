@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: upload files to OSS
-      uses: ShirasawaSama/aliyun-oss-website-action@v2
+      uses: ShirasawaSama/aliyun-oss-website-action@v2.0.0
       with:
         accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
         accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
